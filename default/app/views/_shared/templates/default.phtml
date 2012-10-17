@@ -14,21 +14,16 @@
 <?php Tag::css('structure') ?>
 <?php Tag::css('style') ?>
 <?php echo Html::includeCss() ?>
-
 </head>
 <body>
-
-	<?php View::partial('main/navbar') ?>
-	
+	<?php View::partial('main/navbar') ?> 
 	<div id="content">
-	<?php View::content() ?>
+	<?php View::content() ?> 
 	</div>
-		
-	<?php View::partial('main/footer') ?>                
-
+	<?php View::partial('main/footer') ?> 
 <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
 <script type="text/javascript">stLight.options({publisher: "e05a5a49-dee3-49a4-9cf0-5333a28fa9a5"}); </script>
-<?php echo Tag::js('jquery/jquery.min') ?> 
-<?php echo Tag::js('bootstrap/bootstrap') ?>
+<?php echo Tag::js('jquery/jquery-1.8.2.min') ?> 
+<?php echo Tag::js('bootstrap/bootstrap.min') ?>
 </body>
 </html><?= '<!-- Tiempo: ' . round(microtime(1) - START_TIME, 4) . ' seg. -->'?>
