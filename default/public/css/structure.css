@@ -4,10 +4,7 @@
 
 }
 
-#content h3 i.icon {
-	vertical-align: baseline;
-	margin-right: .5em;
-}
+
 
 
 .slogan {
@@ -29,11 +26,17 @@
 	color: #fff;
 }
 
+.nav li {
+	font-size: 15px;
+	margin-bottom: 1px;
+}
 
 
 /********************************* PAGE HOME *******************/
 
 #slogan-home {
+	min-height: 200px;
+	padding-bottom: 0em;
 
 }
 
@@ -46,15 +49,41 @@
 	color: #900;
 }
 
+/********************************* ICONOS *******************/
+
+
+.leftContent {
+padding: 15px 0 0 65px;
+}
+.ico_modelo {
+	background:url(../img/iconos/ico_modelo.png) no-repeat 0 25px;
+}
+.ico_soporte {
+	background:url(../img/iconos/ico_soporte.png) no-repeat 0 25px;
+}
+.ico_soporte2 {
+	background:url(../img/iconos/ico_soporte2.png) no-repeat 0 25px;
+}
+.ico_form {
+	background:url(../img/iconos/ico_form.png) no-repeat 0 25px;
+}
+.ico_image {
+	background:url(../img/iconos/ico_image.png) no-repeat 0 25px;
+}
+.ico_cache {
+	background:url(../img/iconos/ico_cache.png) no-repeat 0 25px;
+}
+.ico_scaffold {
+	background:url(../img/iconos/ico_scaffold.png) no-repeat 0 25px;
+}
+.ico_seguridad {
+	background:url(../img/iconos/ico_seguridad.png) no-repeat 0 25px;
+}
 
 /********************************* PAGE FEATURES *******************/
 
 #slogan-features {
 	height: 135px;
-}
-
-#header.navbar {
-	line-height: 50px;
 }
 
 
@@ -68,7 +97,7 @@
 /* Listado de descargas */
 
 .download-package {
-	margin-bottom: 4em;
+	margin-bottom: 2em;
 }
 
  .download-list {

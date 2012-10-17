@@ -12,6 +12,10 @@ class IndexController extends AppController {
 	
 	public function caracteristicas() {
 	
+	}
+
+	public function escaparate(){
+		
 	}	
 	
 	

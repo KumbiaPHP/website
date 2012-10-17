@@ -1,0 +1,11 @@
+<div id="scaffold">
+<?php View::content();?>
+<h1><?php echo ucwords("$controller_name"),": <span>$action_name</span>" ?></h1>
+
+<?php ModelForm::create($result)?>
+
+<div class="actions">
+	<a href="<?php echo URL_PATH.$controller_name?>/">Listado</a>
+</div>
+<?php View::partial('editors/tinymce') ?>
+</div>
