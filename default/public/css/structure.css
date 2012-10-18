@@ -4,90 +4,66 @@
 
 }
 
-
-
-
-.slogan {
-	padding-top: 6.275em;
-	padding-bottom: 3.275em;
-	margin-bottom: 2em;
-	margin-top: 0;
-	border-bottom: 1px solid #900;
-	background: #900
+.container-top { 
+    padding-top: 0.275em;
+    padding-bottom: 0.275em;
+    margin-bottom: 2em;
+    margin-top: 0;
+    border-bottom: 1px solid #900;
+    background: #900        
 }
 
-.slogan h1 {
-	color: #f90;
-	margin-bottom: .5em;
+.container-top h1, .container-top h2 {
+    color: #f7941d;    
+}
+.container-top p {
+    color: #fff;
 }
 
-.slogan p {
-	font-size: 1.3em;
-	color: #fff;
-}
-
-.nav li {
-	font-size: 15px;
-	margin-bottom: 1px;
-}
-
-
-/********************************* PAGE HOME *******************/
-
-#slogan-home {
-	min-height: 200px;
-	padding-bottom: 0em;
-
-}
-
-
-#features {
-	margin-bottom: 2em;
-}
-
-#features h3 {
-	color: #900;
+.container-bottom {
+    margin-bottom: 50px;
 }
 
 /********************************* ICONOS *******************/
 
-
 .leftContent {
-padding: 15px 0 0 65px;
+    padding: 5px 0 0 65px;
 }
 .ico_modelo {
-	background:url(../img/iconos/ico_modelo.png) no-repeat 0 25px;
+    background:url(../img/iconos/ico_modelo.png) no-repeat 0 25px;
 }
 .ico_soporte {
-	background:url(../img/iconos/ico_soporte.png) no-repeat 0 25px;
+    background:url(../img/iconos/ico_soporte.png) no-repeat 0 25px;
 }
 .ico_soporte2 {
-	background:url(../img/iconos/ico_soporte2.png) no-repeat 0 25px;
+    background:url(../img/iconos/ico_soporte2.png) no-repeat 0 25px;
 }
 .ico_form {
-	background:url(../img/iconos/ico_form.png) no-repeat 0 25px;
+    background:url(../img/iconos/ico_form.png) no-repeat 0 25px;
 }
 .ico_image {
-	background:url(../img/iconos/ico_image.png) no-repeat 0 25px;
+    background:url(../img/iconos/ico_image.png) no-repeat 0 25px;
 }
 .ico_cache {
-	background:url(../img/iconos/ico_cache.png) no-repeat 0 25px;
+    background:url(../img/iconos/ico_cache.png) no-repeat 0 25px;
 }
 .ico_scaffold {
-	background:url(../img/iconos/ico_scaffold.png) no-repeat 0 25px;
+    background:url(../img/iconos/ico_scaffold.png) no-repeat 0 25px;
 }
 .ico_seguridad {
-	background:url(../img/iconos/ico_seguridad.png) no-repeat 0 25px;
+    background:url(../img/iconos/ico_seguridad.png) no-repeat 0 25px;
 }
 
 /********************************* PAGE FEATURES *******************/
 
-#slogan-features {
-	height: 135px;
+.features {
+    min-height: 250px;
+    margin-bottom: 2em;        
 }
 
-
-
+.features h3 {
+    color: #900;
+}
 
 /********************************* PAGE DOWNLOADS *******************/
 
@@ -97,48 +73,59 @@ padding: 15px 0 0 65px;
 /* Listado de descargas */
 
 .download-package {
-	margin-bottom: 2em;
+    margin-bottom: 2em;
 }
 
  .download-list {
-	list-style: none;
-	margin: 0;
-	padding: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
  }
  
  .download-list li {
- 	display: block;
- 	line-height: 2.4;
- 	height: 2.4em;
- 	border-bottom: 1px solid #ccc;
- 	clear: both;
+    display: block;
+    line-height: 2.4;
+    height: 2.4em;
+    border-bottom: 1px solid #ccc;
+    clear: both;
 }
 
 .download-name {
-	width: 200px;
-	display: block;
-	color: #900;
-	float: left;
+    width: 200px;
+    display: block;
+    color: #900;
+    float: left;
 }
 
 .download-action {
-	width: 100px;
-	display: block;
-	float: right;
-	color: #000;
-	text-align: right;
+    width: 100px;
+    display: block;
+    float: right;
+    color: #000;
+    text-align: right;
 }
 
 .download-action a {
-	color: #000;
+    color: #000;
 }
 
 
 /********************************* FOOTER *******************/
 #footer {
-	margin-top: 2em;
-	padding-top: 1em;
-	padding-bottom: 1em;
-	border-top: 1px solid #ccc;
-	background: #efefef;
+    margin-top: 1em;
+    padding-top: 1em;	
+    border-top: 1px solid #ccc;
+    background: #efefef;
+}
+
+@media (max-width: 768px) {
+    #footer .stButton { margin-bottom: 5px; }
+    body { padding-top: 0px !important; }
+    .page-header { width: 90%; margin: 0 10px;}
+}
+
+@media (min-width: 980px) {
+    body {    
+        padding-top: 50px;    
+    }    
 }

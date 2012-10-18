@@ -13,11 +13,16 @@ require_once CORE_PATH . 'kumbia/controller.php';
 
 class AppController extends Controller {
 
-	final protected function initialize()
-	{
-	}
+    /**
+     * Nombre de la página que se mostrará en el template
+     */
+    public $page_title = '';
+    
+    final protected function initialize() {
+        
+    }
 
-	final protected function finalize()
-	{
-	}
+    final protected function finalize() {        
+        $this->page_title = ($this->page_title=='') ? 'KumbiaPHP web & app Framework' : trim($this->page_title).' - KumbiaPHP';        
+    }
 }
