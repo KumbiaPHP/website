@@ -6,49 +6,28 @@
         <?php echo Html::link('#','Descargar Spirit 1b2','class="btn btn-large btn-warning"')?> 
     </div>
     <div class="span6">
-        <div id="myCarousel" class="carousel slide">
-            <div class="carousel-inner">                
-                <div class="item active">
-                    <?php echo Html::img('inicio-kumbiaphp.png') ?>             
-                </div>                
-                <div class="item">
-                    <?php echo Html::img('inicio-kumbiaphp.png') ?>             
-                </div>                
-                <div class="item">
-                    <?php echo Html::img('inicio-kumbiaphp.png') ?>             
-                </div>                
-            </div>                    
-        </div>        
+	<?php echo Html::img('inicio-kumbiaphp.png') ?>   
     </div>    
 </div>
-
 <div class="container-fluid container-bottom features">
     <div class="row-fluid">
         <div class="span4">
             <h3>Rápido, ligero y flexible</h3>
-            <p>KumbiaPHP es un framework para aplicaciones web libre escrito en PHP5. 
-                Basado en las prácticas de desarrollo web como DRY y el Principio KISS para 
-                software comercial y educativo. Kumbiaphp fomenta la velocidad y eficiencia en la 
-                creación y mantenimiento de aplicaciones web, reemplazando tareas de codificación 
-                repetitivas por poder, control y placer. <?php echo Html::link('','Quiero saber más.')?></p>	
-            <?php //echo Html::img('rapido.png') ?> 
+            <p>KumbiaPHP es un framework para aplicaciones web libre escrito en PHP5. Basado en las prácticas de desarrollo web como DRY y el Principio KISS para software comercial y educativo.</P>
+	    <p>Fomenta la velocidad y eficiencia en la creación y mantenimiento de aplicaciones web, reemplazando tareas de codificación repetitivas por poder, control y placer.</p>
+	    <p><?php echo Html::link('','Quiero saber más.')?></p>	
+            <?php echo Html::img('rapido.png') ?> 
         </div>
         <div class="span4">
             <h3>Documentación en español</h3>
-            <p>Aprende y disfruta de KumbiaPHP con los múltiples tutoriales y documentación en 
-                español que hay disponible a traves de la wiki y del API. Aprende más con la <?php echo Html::link('','documentación en español!')?>.</p>
-            <?php //echo Html::img('doc.png') ?> 
+            <p>Aprende y disfruta de KumbiaPHP con los múltiples tutoriales y documentación en español que hay disponible a traves de la wiki y del API.</p>
+	    <p>Aprende más con la <?php echo Html::link('','documentación en español!')?>.</p>
+            <?php echo Html::img('doc.png') ?> 
         </div>
         <div class="span4">
             <h3>Repositorio GitHub</h3>
             <p>Puedes descargar la última versión en desarrollo en GITHub y disponer de las últimas correcciones, cambios y mejoras..</p>
-            <p style="margin: 0 auto;"><?php echo Html::link('', Html::img('github-img.jpeg')) ?></p>
+            <p><?php echo Html::link('', Html::img('github-img.jpeg','KumbiaPHP en github').'KumbiaPHP en GitHub') ?></p>
         </div>
     </div>
 </div>
-
-<script type="text/javascript">   
-$(function () {    
-    $('#myCarousel').carousel ({ interval: 4000 });    
-});
-</script>
