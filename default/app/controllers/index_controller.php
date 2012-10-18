@@ -14,11 +14,6 @@ class IndexController extends AppController {
 	
 	}
 
-	public function escaparate(){
-		
-	}	
-	
-	
 	public function descargas() {
 		
 	}

@@ -16,8 +16,11 @@ class EscaparateController extends AppController {
 
 	public function tag(){
 		
-	}	
+	}
 	
+        public function pais(){
+		
+	}
 	
 	public function nueva() {
 		
