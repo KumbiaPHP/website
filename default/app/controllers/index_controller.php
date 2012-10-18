@@ -26,6 +26,4 @@ class IndexController extends AppController {
 		
 	}
 
-	
-	
 }
