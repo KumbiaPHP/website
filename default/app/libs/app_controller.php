@@ -16,13 +16,13 @@ class AppController extends Controller {
     /**
      * Nombre de la página que se mostrará en el template
      */
-    public $page_title = '';
+    public $page_title = 'KumbiaPHP web & app PHP Framework en español';
     
     final protected function initialize() {
         
     }
 
     final protected function finalize() {        
-        $this->page_title = ($this->page_title=='') ? 'KumbiaPHP web & app Framework' : trim($this->page_title).' - KumbiaPHP';        
+        $this->page_title .= ' - KumbiaPHP';        
     }
 }

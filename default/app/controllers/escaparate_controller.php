@@ -7,7 +7,7 @@ class EscaparateController extends AppController {
 	
 	
 	public function index()	{
-		
+		$this->page_title = 'Escaparate de webs y aplicaciones';
 	}
         
         public function page($page) {

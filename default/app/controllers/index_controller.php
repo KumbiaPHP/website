@@ -11,11 +11,11 @@ class IndexController extends AppController {
 	}
 	
 	public function caracteristicas() {
-	
+		$this->page_title = 'Características del framework KumbiaPHP';
 	}
 
 	public function descargas() {
-		
+		$this->page_title = 'Descargar KumbiaPHP Framework';
 	}
 	
 	public function documentacion() {
@@ -23,7 +23,7 @@ class IndexController extends AppController {
 	}
 	
 	public function irc() {
-		
+		$this->page_title = 'IRC';
 	}
 
 }
