@@ -1,33 +1,33 @@
-<div class="container-fluid container-top">    
-    <div class="page-header span6">
+<header>
+<div class="row container-top">    
+    <div class="span6 page-header ">
         <h1>KumbiaPHP Framework</h1>
         <h2>Programar puede ser más fácil.</h2>
         <p>Descarga KumbiaPHP y desarrolla aplicaciones web estables y rápidas.</p>
-        <?php echo Html::link('#','Descargar Spirit 1b2','class="btn btn-large btn-warning"')?> 
+        <h3><?php echo Html::link('#','Descargar KumbiaPHP 1.2','class="btn-large"')?></h3>
     </div>
     <div class="span6">
-	<?php echo Html::img('inicio-kumbiaphp.png') ?>   
+	<?php echo Html::img('inicio-kumbiaphp.png','Bienvenida KumbiaPHP','width="350" height="202"') ?>   
     </div>    
 </div>
-<div class="container-fluid container-bottom features">
-    <div class="row-fluid">
-        <div class="span4">
-            <h3>Rápido, ligero y flexible</h3>
-            <p>KumbiaPHP es un framework para aplicaciones web libre escrito en PHP5. Basado en las prácticas de desarrollo web como DRY y KISS, para software comercial y educativo.</P>
-	    <p>Fomenta la velocidad y eficiencia en la creación y mantenimiento de aplicaciones web, reemplazando tareas de codificación repetitivas por poder, control y placer.</p>
-	    <p><?php echo Html::link('','Quiero saber más.')?></p>	
-            <?php echo Html::img('rapido.png') ?> 
-        </div>
-        <div class="span4">
-            <h3>Documentación en español</h3>
-            <p>Aprende y disfruta de KumbiaPHP con los múltiples tutoriales y documentación en español, que hay disponible a traves de la wiki y del API.</p>
-	    <p>Aprende más con la <?php echo Html::link('','documentación en español')?>.</p>
-            <?php echo Html::img('doc.png') ?> 
-        </div>
-        <div class="span4">
-            <h3>Repositorio GitHub</h3>
-            <p>Puedes descargar la última versión en desarrollo en GITHub y disponer de las últimas correcciones, cambios y mejoras..</p>
-            <p><a href="https://github.com/KumbiaPHP/KumbiaPHP" ><?php echo Html::img('github-img.jpeg','KumbiaPHP en github') ?>KumbiaPHP en GitHub</a></p>
-        </div>
+</header>
+<div class="row">
+    <div class="span4">
+        <h3>Rápido, ligero y flexible</h3>
+        <p>KumbiaPHP es un framework para aplicaciones web libre escrito en <abbr title="Programación Orientada a Objetos">POO</abbr> PHP5. Basado en prácticas de desarrollo como <abbr title="Don't Repeat Yourself - No te repitas">DRY</abbr> y <abbr title="Keep It Short and Simple | Manténgalo breve y simple">KISS</abbr>, para software comercial y educativo.</P>
+    <p>Fomenta la velocidad y eficiencia en la creación y mantenimiento de aplicaciones web. Reemplazando tareas de codificación repetitivas por poder, control y placer.</p>
+    <p><?php echo Html::link('caracteristicas/','Quiero saber más.')?></p>	
+        <?php echo Html::img('rapido.png') ?> 
+    </div>
+    <div class="span4">
+        <h3>Documentación en español</h3>
+        <p>Aprende y disfruta de KumbiaPHP con los múltiples tutoriales y documentación en español, que hay disponible a traves de la wiki y del <abbr title="Application Programming Interface - Interfaz de programación de aplicaciones">API</abbr>.</p>
+    <p>Aprende más con la <?php echo Html::link('aprender/','documentación en español')?>.</p>
+        <?php echo Html::img('doc.png') ?> 
+    </div>
+    <div class="span4">
+        <h3>Repositorio GitHub</h3>
+        <p>Puedes descargar la última versión en desarrollo desde GITHub y disponer de las últimas correcciones, cambios y mejoras..</p>
+        <p><a href="https://github.com/KumbiaPHP/KumbiaPHP" ><?php echo Html::img('github-img.jpeg','KumbiaPHP en github') ?>KumbiaPHP en GitHub</a></p>
     </div>
 </div>

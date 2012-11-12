@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-        <meta charset="utf-8"/>
-        <title><?= $page_title ?></title>
-        <!--<link rel="stylesheet" href="/css/bootstrap.css"/>
-        <link rel="stylesheet" href="/css/structure.css"/>
-        <link rel="stylesheet" href="/css/style.css"/>-->
-        <?php Tag::css('bootstrap.min') ?>
-        <?php Tag::css('structure') ?>
-        <?php echo Html::includeCss() ?> 
+    <meta charset="utf-8"/>
+    <title><?= $page_title ?></title>
+    <!--[if lt IE 9]>
+        <?php echo Tag::js('html5shiv') ?> 
+    <![endif]-->
+    <!--<link rel="stylesheet" href="/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/css/structure.css"/>
+    <link rel="stylesheet" href="/css/style.css"/>-->
+    <?php Tag::css('structure') ?>
+    <?php echo Html::includeCss() ?>
 </head>
 <body>
 	<?php View::partial('main/navbar') ?> 
@@ -16,9 +18,9 @@
             <?php View::content() ?> 
 	</div>
 	<?php View::partial('main/footer') ?> 
-<?php echo Tag::js('jquery/jquery-1.8.2.min') ?> 
-<?php echo Tag::js('bootstrap/bootstrap.min') ?> 
-<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<?php //echo Tag::js('jquery/jquery-1.8.2.min') ?> 
+<?php //echo Tag::js('bootstrap/bootstrap.min') ?> 
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js" ></script>
 <script type="text/javascript">stLight.options({publisher: "e05a5a49-dee3-49a4-9cf0-5333a28fa9a5"}); </script>
 </body>
 </html>
