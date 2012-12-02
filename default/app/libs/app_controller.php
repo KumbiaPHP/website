@@ -18,6 +18,8 @@ class AppController extends Controller {
      */
     public $page_title = 'KumbiaPHP web & app PHP Framework en español';
     
+    public $menu = 'index'; //para seleccionar el menu
+
     final protected function initialize() {
         
     }

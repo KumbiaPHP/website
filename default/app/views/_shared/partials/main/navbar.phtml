@@ -1,13 +1,13 @@
 <nav>
 <div class="row">
     <?php echo Html::link('','KumbiaPHP','class="logo span3" title="KumbiaPHP Framework PHP MVC"');//Html::img('kumbiaphp.png','KumbiaPHP Framework','width=183 height=50')) ?> 
-    <ul class="menu">
-        <li><?php echo Html::link('caracteristicas/', 'Características') ?></li>
-        <li><?php echo Html::link('escaparate/', 'Escaparate') ?></li>
+    <ul class="menu <?php echo $menu?>">
+        <li><?php echo Html::link('caracteristicas/', 'Características','class="caracteristicas"') ?></li>
+        <li><?php echo Html::link('escaparate/', 'Escaparate','class="escaparate"') ?></li>
         <li><a href="http://www.kumbiaphp.com/blog/">Blog</a><?php //echo Html::link('blog/', 'Blog') ?></li>
-        <li><?php echo Html::link('aprender/', 'Documentación') ?></li>
-        <li><?php echo Html::link('comunidad/', 'Comunidad') ?></li>
-        <li><?php echo Html::link('descargas/', 'Descargar') ?></li>
+        <li><?php echo Html::link('aprender/', 'Documentación','class="aprender"') ?></li>
+        <li><?php echo Html::link('comunidad/', 'Comunidad','class="comunidad"') ?></li>
+        <li><?php echo Html::link('descargas/', 'Descargar','class="descargas"') ?></li>
     </ul>
 </div>
 </nav>

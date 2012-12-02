@@ -6,7 +6,8 @@
  */
 class ComunidadController extends AppController {
 	
-	
+	public $menu = "comunidad"; //para el menu
+
 	public function index()	{
 		$this->page_title = 'Comunidad';
 	}

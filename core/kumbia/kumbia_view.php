@@ -279,7 +279,7 @@ class KumbiaView {
 		}
 
 		if(is_string($params)) {
-			$params = Util::get_params($params);
+			$params = Util::getParams($params);
 		}
 
 		// carga los parametros en el scope

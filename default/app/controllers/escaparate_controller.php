@@ -5,7 +5,8 @@
  */
 class EscaparateController extends AppController {
 	
-	
+	public $menu = "escaparate"; //para el menu
+
 	public function index()	{
 		$this->page_title = 'Escaparate de webs y aplicaciones';
 	}
