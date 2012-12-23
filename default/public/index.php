@@ -50,7 +50,8 @@ define('APP_PATH', dirname(dirname(__FILE__)) . '/app/');
  * CORE_PATH:
  * - Ruta al directorio que contiene el núcleo de Kumbia (por defecto la ruta al directorio core)
  */
-define('CORE_PATH', dirname(dirname(APP_PATH)) . '/core/');
+define('CORE_PATH', '/home/joan/git/KumbiaPHP/core/');
+//define('CORE_PATH', dirname(dirname(APP_PATH)) . '/core/');
 
 /**
  * Define el PUBLIC_PATH

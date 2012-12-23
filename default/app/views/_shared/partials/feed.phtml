@@ -1,6 +1,6 @@
 <?php
 /**
- * Visualizar feed por Joanhey
+ * Visualizar feed RSS por Joanhey
  *
  * @param string $nombre Nombre
  * @param string $url URL completa del feed
@@ -9,10 +9,10 @@
 
 if ($feed = simplexml_load_file($url)): ?>
     <div class="feed">
-    <h3><a href="<?=$feed->channel->link?>" title="<?= h($feed->channel->description)?>"><?= $name?></a></h3>
+    <h3><a href="<?= h($feed->channel->link)?>" title="<?= h($feed->channel->description)?>"><?= h($name)?></a></h3>
     <ul>
     <? foreach ($feed->channel->item as $item) : ?>
-    <li><a href="<?= $item->link?>" title="<?= $item->description?>"><?=$item->title?></a></li>
+    <li><a href="<?= h($item->link)?>" title="<?= h(substr(strip_tags($item->description),0,200))?>..."><?= h($item->title)?></a></li>
     <? endforeach?>
 </ul></div>
 <?php endif?>

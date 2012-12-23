@@ -9,10 +9,11 @@
     <link rel="stylesheet" href="/css/style.css"/>-->
     <?php Tag::css('structure') ?>
     <?php echo Html::includeCss() ?>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 	<?php View::partial('main/navbar',NULL,array('menu'=>$menu)) ?> 
-	<div id="content row">
+	<div id="content">
             <?php View::content() ?> 
 	</div>
 	<?php View::partial('main/footer') ?> 

@@ -161,9 +161,9 @@ background-image: linear-gradient(to bottom, #F95E0C 0%,#CD2A02 100%);
 }
 
 /*******BLOG*****/
-.widget-title{border-bottom:2px solid #DCC;margin-bottom:.5em}
-.smallcol ul{list-style: none outside none;margin:0;padding:0 0 0 .5em}
-.smallcol li{border-bottom:1px dotted #FDD;line-height:2em}
+.widget-title,.feed h3{border-bottom:2px solid #DCC;margin-bottom:.5em}
+.smallcol ul,.feed ul{list-style: none outside none;margin:0;padding:0 0 0 .5em}
+.smallcol li,.feed li{border-bottom:1px dotted #FDD;line-height:2em}
 
 /********************************* ICONOS *******************/
 
