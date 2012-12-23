@@ -50,8 +50,7 @@ class EscaparateController extends AppController
     public function web($web)
     {
         if (!$this->item = Load::model('escaparate')->findByTitle($web)) {
-            Flash::warning("No existe la web $web en el escaparate");
-            return Router::redirect();
+            throw new KumbiaException('No existe esta web');
         }
     }
 

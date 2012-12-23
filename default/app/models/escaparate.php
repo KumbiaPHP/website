@@ -5,10 +5,10 @@ class Escaparate extends ActiveRecord
 
     const INACTIVE = '0';
     const ACTIVE = 1;
-    const IMG_WIDTH = 300;
-    const IMG_HEIGHT = 300;
-    const THUMB_WIDTH = 150;
-    const THUMB_HEIGHT = 110;
+    const IMG_WIDTH = 340;
+    const IMG_HEIGHT = 260;
+    const THUMB_WIDTH = 200;
+    const THUMB_HEIGHT = 160;
     
     protected function initialize()
     {

@@ -1,18 +1,5 @@
-/*
-Navicat MySQL Data Transfer
 
-Source Server         : localhost
-Source Server Version : 50508
-Source Host           : localhost:3306
-Source Database       : k_site
-
-Target Server Type    : MYSQL
-Target Server Version : 50508
-File Encoding         : 65001
-
-Date: 2012-12-22 14:31:42
-*/
-
+SET NAMES 'utf8';
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
@@ -20,8 +7,8 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `categoria`;
 CREATE TABLE `categoria` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) CHARACTER SET utf8 NOT NULL,
   `status` int(1) DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
@@ -38,12 +25,12 @@ INSERT INTO `categoria` VALUES ('3', 'Educación', '1');
 -- ----------------------------
 DROP TABLE IF EXISTS `escaparate`;
 CREATE TABLE `escaparate` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `pais_id` int(11) NOT NULL,
-  `categoria_id` int(11) NOT NULL,
-  `url` varchar(100) NOT NULL,
-  `title` varchar(200) NOT NULL,
-  `description` text,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `pais_id` int(11) unsigned NOT NULL,
+  `categoria_id` int(11) unsigned NOT NULL,
+  `url` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `title` varchar(200) CHARACTER SET utf8 NOT NULL,
+  `description` text CHARACTER SET utf8,
   `thumbnail` varchar(100) NOT NULL,
   `image` varchar(100) NOT NULL,
   `tags` varchar(250) DEFAULT NULL,
@@ -60,13 +47,13 @@ CREATE TABLE `escaparate` (
 -- ----------------------------
 DROP TABLE IF EXISTS `pais`;
 CREATE TABLE `pais` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(80) DEFAULT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(80) CHARACTER SET utf8 DEFAULT NULL,
   `isonum` smallint(6) DEFAULT NULL,
   `iso2` char(2) DEFAULT NULL,
   `iso3` char(3) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=241 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=241 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of pais
