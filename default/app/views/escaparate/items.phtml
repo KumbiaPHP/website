@@ -1,0 +1,19 @@
+<?php foreach ($items->items as $item): ?>
+    <li class="span3">
+        <div class="thumbnail">
+            <?php
+            echo Html::link('escaparate/web/' . urlencode($item->title)
+                    , Html::img($item->thumbnail, basename($item->thumbnail)))
+            ?>
+            <div class="caption">
+                <h3><?php echo Html::link('escaparate/web/' . urlencode($item->title), $item->title) ?></h3>
+                <p><?php eh($item->description) ?></p>
+                <p>
+                    <?php foreach ($item->getTags() as $tag): ?>
+                        <span class="label"><?php echo Html::link('escaparate/tag/' . h($tag), h($tag)) ?></span>
+    <?php endforeach; ?>
+                </p>
+            </div>
+        </div>
+    </li>
+<?php endforeach; ?>

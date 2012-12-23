@@ -1,0 +1,38 @@
+<header class="container-top">    
+    <div class="row">
+        <h1>Escaparate Web</h1>
+        <p>Agregar web al Escaparate</p>
+    </div>
+</header>
+<div class="row">
+    <?php echo Form::openMultipart() ?>
+    <?php View::content() ?>
+    <div class="row form">
+        <div class="row">
+            <label class="span3">Título (*)</label><?php echo Form::text('form.title', 'required maxlength="200" class="span6"') ?><br/>
+        </div>
+        <div class="row">
+            <label class="span3">URL (*)</label><?php echo Form::text('form.url', 'required maxlength="100" class="span6"') ?><br/>
+        </div>
+        <div class="row">
+            <label class="span3">Pais (*)</label><?php echo Form::dbSelect('form.pais_id', null, null, null, 'required class="span6"') ?><br/>
+        </div>
+        <div class="row">
+            <label class="span3">Descripción</label><?php echo Form::textarea('form.description', 'class="span6"') ?><br/>
+        </div>
+        <div class="row">
+            <label class="span3">Imagen del Sitio (*)</label><?php echo Form::file('image', 'required') ?><br/>
+        </div>
+        <div class="row">
+            <label class="span3">Categoría (*)</label><?php echo Form::dbSelect('form.categoria_id', 'name', array('categoria','find','status = 1'), null, 'required class="span6"') ?><br/>
+        </div>
+        <div class="row">
+            <label class="span3">Etiquetas</label><?php echo Form::text('form.tags', 'maxlength="250" class="span6"') ?><br/>
+        </div>
+        <div class="row">
+            <div class="span3">&nbsp;</div>
+            <div class="span6"><input type="submit" value="Enviar" class="btn pull-right" /></div>
+        </div>
+    </div>
+    <?php echo Form::close() ?>
+</div>

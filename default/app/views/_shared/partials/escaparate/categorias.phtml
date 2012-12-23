@@ -1,0 +1,8 @@
+<?php
+$cats = Load::model('categoria')->find_all_by_status(1);
+?>
+<ul class="nav nav-tabs">
+    <?php foreach ($cats as $cat): ?>
+    <li><?php echo Html::link('escaparate/categoria/' . mb_convert_case($cat->name, MB_CASE_LOWER, APP_CHARSET), $cat->name) ?></li>
+    <?php endforeach; ?>
+</ul>

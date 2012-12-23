@@ -1,0 +1,28 @@
+<header class="container-top">    
+    <div class="row">
+        <h1>Escaparate Web</h1>
+        <p>Web > <?php eh($item->getPais()->name) ?> > <?php eh($item->title) ?></p>
+    </div>
+</header>
+<div class="row">
+    <?php View::content() ?>
+    <div class="row">
+        <div class="span4">
+            <?php echo Html::img($item->image, $item->image) ?>
+        </div>
+        <div class="span5">
+            <a class="btn-large" href="<?php echo $item->url ?>">Visitar el Sitio</a>            
+            <p><?php eh($item->description) ?></p>
+        </div>
+    </div><br/>
+    <div class="row">
+        <div class="span4">
+            Categoría: <?php eh($item->getCategoria()->name) ?>
+        </div>
+        <div class="span5">Etiquetas: 
+            <?php foreach ($item->getTags() as $tag): ?>
+                <span class="label"><?php echo Html::link('escaparate/tag/' . h($tag), h($tag)) ?></span>
+            <?php endforeach; ?>
+        </div>
+    </div>
+</div>
