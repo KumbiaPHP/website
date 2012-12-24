@@ -29,6 +29,7 @@ CREATE TABLE `escaparate` (
   `pais_id` int(11) unsigned NOT NULL,
   `categoria_id` int(11) unsigned NOT NULL,
   `url` varchar(100) CHARACTER SET utf8 NOT NULL,
+  `slug` varchar(100) NOT NULL,
   `title` varchar(200) CHARACTER SET utf8 NOT NULL,
   `description` text CHARACTER SET utf8,
   `thumbnail` varchar(100) NOT NULL,

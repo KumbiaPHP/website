@@ -15,6 +15,8 @@ class Escaparate extends ActiveRecord
         $this->belongs_to('pais');
         $this->belongs_to('categoria');
     }
+    
+    public $before_save = 'createSlug';
 
     public function findByStatus($status = self::ACTIVE, $page = 1)
     {
