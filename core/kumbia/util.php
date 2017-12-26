@@ -1,6 +1,6 @@
 <?php
 /**
- * KumbiaPHP web & app Framework
+ * KumbiaPHP web & app Framework.
  *
  * LICENSE
  *
@@ -11,125 +11,94 @@
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@kumbiaphp.com so we can send you a copy immediately.
- * 
+ *
  * @category   Kumbia
- * @package    Core 
- * @copyright  Copyright (c) 2005-2012 Kumbia Team (http://www.kumbiaphp.com)
+ *
+ * @copyright  Copyright (c) 2005 - 2017 Kumbia Team (http://www.kumbiaphp.com)
  * @license    http://wiki.kumbiaphp.com/Licencia     New BSD License
  */
 
 /**
- * Utilidades para uso general del framework
+ * Utilidades para uso general del framework.
  *
  * Manejo de cadenas de caracteres.
  * Conversión de parametros con nombre a arreglos.
  *
  * @category   Kumbia
- * @package    Core
  */
 class Util
 {
-
     /**
-     * Convierte la cadena con espacios o guión bajo en notacion camelcase
+     * Convierte la cadena con espacios o guión bajo en notación camelcase.
      *
-     * @param string $s cadena a convertir
-     * @param boolean $lower indica si es lower camelcase
+     * @param string $str   cadena a convertir
+     * @param bool   $lower indica si es lower camelcase
+     *
      * @return string
      * */
-    public static function camelcase($s, $lower=FALSE)
+    public static function camelcase($str, $lower = false)
     {
         // Notacion lowerCamelCase
         if ($lower) {
-            return self::lcfirst(str_replace(' ', '', ucwords(str_replace('_', ' ', $s))));
+            return lcfirst(str_replace(' ', '', ucwords(str_replace('_', ' ', $str))));
         }
 
-        return str_replace(' ', '', ucwords(str_replace('_', ' ', $s)));
+        return str_replace(' ', '', ucwords(str_replace('_', ' ', $str)));
     }
 
     /**
-     * Descameliza una cadena camelizada y la convierte a smallcase
-     * @deprecated mejor usar el metodo smallcase directamente
+     * Convierte la cadena CamelCase en notación smallcase.
      *
-     * @param string $s
-     * @return string
-     */
-    public static function uncamelize($str)
-    {
-        return self::smallcase($str);
-    }
-
-    /**
-     * Convierte la cadena CamelCase en notacion smallcase
-     * @param string $s cadena a convertir
+     * @param string $str cadena a convertir
+     *
      * @return string
      * */
-    public static function smallcase($s)
+    public static function smallcase($str)
     {
-        return strtolower(preg_replace('/([A-Z])/', "_\\1", self::lcfirst($s)));
+        return strtolower(preg_replace('/([A-Z])/', '_\\1', lcfirst($str)));
     }
 
     /**
-     * Remplaza en la cadena los espacios por guiónes bajos (underscores)
-     * @param string $s
+     * Remplaza en la cadena los espacios por guiónes bajos (underscores).
+     *
+     * @param string $str
+     *
      * @return string
      * */
-    public static function underscore($s)
+    public static function underscore($str)
     {
-        return strtr($s, ' ', '_');
+        return strtr($str, ' ', '_');
     }
 
     /**
-     * Remplaza en la cadena los espacios por dash (guiones)
-     * @param string $s
+     * Remplaza en la cadena los espacios por dash (guiones).
+     *
+     * @param string $str
+     *
      * @return string
      */
-    public static function dash($s)
+    public static function dash($str)
     {
-        return strtr($s, ' ', '-');
+        return strtr($str, ' ', '-');
     }
 
     /**
-     * Remplaza en una cadena los underscore o dashed por espacios
-     * @param string $s
+     * Remplaza en una cadena los underscore o dashed por espacios.
+     *
+     * @param string $str
+     *
      * @return string
      */
-    public static function humanize($s)
+    public static function humanize($str)
     {
-        return strtr($s, '_-', '  ');
+        return strtr($str, '_-', '  ');
     }
 
     /**
-     * Merge Two Arrays Overwriting Values $a1
-     * from $a2
-     * @deprecated
-     *
-     * @param array $a1
-     * @param array $a2
-     * @return array
-     */
-    public static function array_merge_overwrite($a1, $a2)
-    {
-        return $a2 + $a1;
-    }
-
-    /**
-     * Insertar para arrays númericos
-     * @deprecated No es necesario
-     *
-     * @param array &$array array donde se insertará (por referencia)
-     * @param int $position Indice donde se realizara la insercion
-     * @param mixed $insert Valor a insertar
-     * */
-    public static function array_insert(&$array, $position, $insert)
-    {
-        array_splice($array, $position, 0, $insert);
-    }
-
-    /**
-     * Convierte los parametros de una funcion o metodo de parametros por nombre a un array
+     * Convierte los parámetros de una función o método de parámetros por nombre a un array.
      *
      * @param array $params
+     *
      * @return array
      */
     public static function getParams($params)
@@ -147,75 +116,21 @@ class Util
                 $data[] = $p;
             }
         }
+
         return $data;
     }
 
     /**
      * Recibe una cadena como: item1,item2,item3 y retorna una como: "item1","item2","item3".
      *
-     * @param string $lista Cadena con Items separados por comas (,).
-     * @return string Cadena con Items encerrados en doblecomillas y separados por comas (,).
+     * @param string $lista cadena con Items separados por comas (,)
+     *
+     * @return string cadena con Items encerrados en doblecomillas y separados por comas (,)
      */
     public static function encomillar($lista)
     {
         $items = explode(',', $lista);
-        return '"' . implode('","', $items) . '"';
-    }
 
-    /**
-     * Crea un path.
-     * @deprecated
-     * @todo Mover este método a una lib para manejo de ficheros.
-     * En salir la beta2 se eliminará del Util
-     *
-     * @param string $path ruta a crear
-     * @return boolean
-     */
-    public static function mkpath($path)
-    {
-        if (file_exists($path) or @mkdir($path))
-            return TRUE;
-        return (self::mkpath(dirname($path)) and mkdir($path));
+        return '"'.implode('","', $items).'"';
     }
-
-    /**
-     * Elimina un directorio.
-     * @deprecated
-     * @todo Mover este método a una lib para manejo de ficheros.
-     * En salir la beta2 se eliminará del Util
-     *
-     * @param string $dir ruta de directorio a eliminar
-     * @return boolean
-     */
-    public static function removedir($dir)
-    {
-        // Obtengo los archivos en el directorio a eliminar
-        if ($files = array_merge(glob("$dir/*"), glob("$dir/.*"))) {
-            // Elimino cada subdirectorio o archivo
-            foreach ($files as $file) {
-                // Si no son los directorios "." o ".." 
-                if (!preg_match("/^.*\/?[\.]{1,2}$/", $file)) {
-                    if (is_dir($file)) {
-                        return self::removedir($file);
-                    } elseif (!@unlink($file)) {
-                        return FALSE;
-                    }
-                }
-            }
-        }
-        return @rmdir($dir);
-    }
-
-    /**
-     * Coloca la primera letra en minuscula
-     *
-     * @param string $s cadena a convertir
-     * @return string
-     */
-    public static function lcfirst($s)
-    {
-        $s[0] = strtolower($s[0]);
-        return $s;
-    }
-
 }

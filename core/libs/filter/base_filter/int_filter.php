@@ -15,7 +15,7 @@
  * @category   Kumbia
  * @package    Filter
  * @subpackage BaseFilter
- * @copyright  Copyright (c) 2005-2012 Kumbia Team (http://www.kumbiaphp.com)
+ * @copyright  Copyright (c) 2005 - 2017 Kumbia Team (http://www.kumbiaphp.com)
  * @license    http://wiki.kumbiaphp.com/Licencia     New BSD License
  */
 
@@ -32,7 +32,7 @@ class IntFilter implements FilterInterface
     /**
      * Ejecuta el filtro
      *
-     * @param string $value
+     * @param string $s
      * @param array $options
      * @return int
      */

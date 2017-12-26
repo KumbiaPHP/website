@@ -1,6 +1,6 @@
 <?php
 /**
- * KumbiaPHP web & app Framework
+ * KumbiaPHP web & app Framework.
  *
  * LICENSE
  *
@@ -13,83 +13,105 @@
  * to license@kumbiaphp.com so we can send you a copy immediately.
  *
  * @category   Kumbia
- * @package    Core 
- * @copyright  Copyright (c) 2005-2012 Kumbia Team (http://www.kumbiaphp.com)
+ *
+ * @copyright  Copyright (c) 2005 - 2017 Kumbia Team (http://www.kumbiaphp.com)
  * @license    http://wiki.kumbiaphp.com/Licencia     New BSD License
  */
 
 /**
- * Clase principal para el manejo de excepciones
+ * Clase principal para el manejo de excepciones.
  *
  * @category   Kumbia
- * @package    Core
  */
 class KumbiaException extends Exception
 {
-
     /**
-     * Codigo de error de la Excepcion
+     * View de error de la Excepción.
      *
      * @var string
      */
-    protected $_view;
+    protected $view;
 
     /**
-     * Constructor de la clase;
+     * Error 404 para los siguientes views.
+     *
+     * @var array
+     */
+    protected static $view404 = array('no_controller', 'no_action', 'num_params', 'no_view');
+
+    /**
+     * Path del template de exception.
+     *
+     * @var string
+     */
+    protected $template = 'views/templates/exception.phtml';
+
+    /**
+     * Constructor de la clase;.
      *
      * @param string $message mensaje
-     * @param string $view vista que se mostrara
+     * @param string $view    vista que se mostrara
      */
     public function __construct($message, $view = 'exception')
     {
-        $this->_view = $view;
+        $this->view = $view;
         parent::__construct($message);
     }
 
     /**
-     * Maneja las excepciones no capturadas
+     * Maneja las excepciones no capturadas.
      *
-     * @param Exception $e
+     * @param Exception|KumbiaException $e
      * */
-    public static function handle_exception($e)
+    public static function handleException($e)
     {
-        if (isset($e->_view) && ($e->_view == 'no_controller' || $e->_view == 'no_action')) {
-            header('HTTP/1.1 404 Not Found');
-        } else {
-            header('HTTP/1.1 500 Internal Server Error');
-        }
-
+        self::setHeader($e);
+        //TODO quitar el extract, que el view pida los que necesite
         extract(Router::get(), EXTR_OVERWRITE);
+        // Registra la autocarga de helpers
+        spl_autoload_register('kumbia_autoload_helper', true, true);
 
         $Controller = Util::camelcase($controller);
         ob_start();
-        if (PRODUCTION) {
-            include APP_PATH . 'views/_shared/errors/404.phtml';
+        if (PRODUCTION) { //TODO: añadir error 500.phtml
+            include APP_PATH.'views/_shared/errors/404.phtml';
+
             return;
-        } else {
-            $Template = 'views/templates/exception.phtml';
-            if (isset($e->_view)) {
-                include CORE_PATH . "views/errors/{$e->_view}.phtml";
-            } else {
-                include CORE_PATH . "views/errors/exception.phtml";
-            }
         }
+        if ($e instanceof self) {
+            $view = $e->view;
+            $tpl = $e->template;
+        } else {
+            $view = 'exception';
+            $tpl = 'views/templates/exception.phtml';
+        }
+        //Fix problem with action name in REST
+        $action = $e->getMessage() ?: $action;
+
+        include CORE_PATH."views/errors/{$view}.phtml";
+
         $content = ob_get_clean();
 
         // termina los buffers abiertos
-        while (ob_get_level ()) {
+        while (ob_get_level()) {
             ob_end_clean();
         }
-
-        // verifica si esta cargado el View
-        if (class_exists('View')) {
-            if (View::get('template') === NULL) {
-                echo $content;
-                exit;
-            }
-        }
-
-        include CORE_PATH . $Template;
+        include CORE_PATH.$tpl;
     }
 
+    /**
+     * Añade la cabezera de error http.
+     *
+     * @param Exception $e
+     * */
+    private static function setHeader($e)
+    {
+        if ($e instanceof self && in_array($e->view, self::$view404)) {
+            http_response_code(404);
+
+            return;
+        }
+        http_response_code(500);
+        //TODO: mover a los views
+    }
 }

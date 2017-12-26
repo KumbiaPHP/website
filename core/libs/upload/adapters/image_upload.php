@@ -14,7 +14,7 @@
  *
  * @category   Kumbia
  * @package    Upload
- * @copyright  Copyright (c) 2005-2012 Kumbia Team (http://www.kumbiaphp.com)
+ * @copyright  Copyright (c) 2005 - 2017 Kumbia Team (http://www.kumbiaphp.com)
  * @license    http://wiki.kumbiaphp.com/Licencia     New BSD License
  */
 
@@ -26,16 +26,15 @@
  */
 class ImageUpload extends Upload
 {
-
     /**
-     * Ruta donde se guardara el archivo
+     * Información de la imagen
      *
-     * @var string
+     * @var array|boolean
      */
-    protected $_path;
+    protected $_imgInfo;
     /**
      * Ancho mínimo de la imagen
-     * 
+     *
      * @var int
      */
     protected $_minWidth = NULL;
@@ -47,7 +46,7 @@ class ImageUpload extends Upload
     protected $_maxWidth = NULL;
     /**
      * Alto mínimo de la imagen
-     * 
+     *
      * @var int
      */
     protected $_minHeight = NULL;
@@ -60,20 +59,22 @@ class ImageUpload extends Upload
 
     /**
      * Constructor
-     * 
+     *
      * @param string $name nombre de archivo por metodo POST
      */
     public function __construct($name)
     {
         parent::__construct($name);
 
+        $this->_imgInfo = getimagesize($_FILES[$name]['tmp_name']);
+
         // Ruta donde se guardara el archivo
-        $this->_path = dirname(APP_PATH) . '/public/img/upload';
+        $this->_path = dirname($_SERVER['SCRIPT_FILENAME']) . '/img/upload';
     }
 
     /**
      * Asigna la ruta al directorio de destino para la imagen
-     * 
+     *
      * @param string $path ruta al directorio de destino (Ej: /home/usuario/data)
      */
     public function setPath($path)
@@ -83,7 +84,7 @@ class ImageUpload extends Upload
 
     /**
      * Asigna el ancho mínimo de la imagen
-     * 
+     *
      * @param int $value
      */
     public function setMinWidth($value)
@@ -93,7 +94,7 @@ class ImageUpload extends Upload
 
     /**
      * Asigna el ancho máximo de la imagen
-     * 
+     *
      * @param int $value
      */
     public function setMaxWidth($value)
@@ -103,7 +104,7 @@ class ImageUpload extends Upload
 
     /**
      * Asigna el alto mínimo de la imagen
-     * 
+     *
      * @param int $value
      */
     public function setMinHeight($value)
@@ -113,7 +114,7 @@ class ImageUpload extends Upload
 
     /**
      * Asigna el alto máximo de la imagen
-     * 
+     *
      * @param int $value
      */
     public function setMaxHeight($value)
@@ -123,7 +124,7 @@ class ImageUpload extends Upload
 
     /**
      * Valida el archivo antes de guardar
-     * 
+     *
      * @return boolean
      */
     protected function _validates()
@@ -134,18 +135,17 @@ class ImageUpload extends Upload
             return FALSE;
         }
 
+
+        $image = $this->_imgInfo;
         // Verifica que sea un archivo de imagen
-        if (!preg_match('/^image\//i', $_FILES[$this->_name]['type'])) {
+        if (!$image){
             Flash::error('Error: el archivo debe ser una imagen');
             return FALSE;
         }
 
         // Verifica ancho minimo de la imagen
         if ($this->_minWidth !== NULL) {
-            // Obtiene datos de la imagen
-            $imageSize = getimagesize($_FILES[$this->_name]['tmp_name']);
-
-            if ($imageSize[0] < $this->_minWidth) {
+            if ($image[0] < $this->_minWidth) {
                 Flash::error("Error: el ancho de la imagen debe ser superior o igual a {$this->_minWidth}px");
                 return FALSE;
             }
@@ -153,12 +153,7 @@ class ImageUpload extends Upload
 
         // Verifica ancho maximo de la imagen
         if ($this->_maxWidth !== NULL) {
-            if (!isset($imageSize)) {
-                // Obtiene datos de la imagen
-                $imageSize = getimagesize($_FILES[$this->_name]['tmp_name']);
-            }
-
-            if ($imageSize[0] > $this->_maxWidth) {
+            if ($image[0] > $this->_maxWidth) {
                 Flash::error("Error: el ancho de la imagen debe ser inferior o igual a {$this->_maxWidth}px");
                 return FALSE;
             }
@@ -166,10 +161,7 @@ class ImageUpload extends Upload
 
         // Verifica alto minimo de la imagen
         if ($this->_minHeight !== NULL) {
-            // Obtiene datos de la imagen
-            $imageSize = getimagesize($_FILES[$this->_name]['tmp_name']);
-
-            if ($imageSize[1] < $this->_minHeight) {
+            if ($image[1] < $this->_minHeight) {
                 Flash::error("Error: el alto de la imagen debe ser superior o igual a {$this->_minHeight}px");
                 return FALSE;
             }
@@ -177,12 +169,7 @@ class ImageUpload extends Upload
 
         // Verifica alto maximo de la imagen
         if ($this->_maxHeight !== NULL) {
-            if (!isset($imageSize)) {
-                // Obtiene datos de la imagen
-                $imageSize = getimagesize($_FILES[$this->_name]['tmp_name']);
-            }
-
-            if ($imageSize[1] > $this->_maxHeight) {
+            if ($image[1] > $this->_maxHeight) {
                 Flash::error("Error: el alto de la imagen debe ser inferior o igual a {$this->_maxHeight}px");
                 return FALSE;
             }
@@ -199,10 +186,11 @@ class ImageUpload extends Upload
      */
     protected function _validatesTypes()
     {
+        // Verifica que sea un archivo de imagen
+        if (!$this->_imgInfo) return FALSE;
+
         foreach ($this->_types as $type) {
-            if ($_FILES[$this->_name]['type'] == "image/$type") {
-                return TRUE;
-            }
+            if ($this->_imgInfo['mime'] == "image/$type") return TRUE;
         }
 
         return FALSE;
@@ -210,7 +198,7 @@ class ImageUpload extends Upload
 
     /**
      * Guardar el archivo en el servidor
-     * 
+     *
      * @param string $name nombre con el que se guardará el archivo
      * @return boolean
      */

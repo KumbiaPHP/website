@@ -1,6 +1,6 @@
 <?php
 /**
- * KumbiaPHP web & app Framework
+ * KumbiaPHP web & app Framework.
  *
  * LICENSE
  *
@@ -12,86 +12,84 @@
  * obtain it through the world-wide-web, please send an email
  * to license@kumbiaphp.com so we can send you a copy immediately.
  *
- * @category   Kumbia
- * @package    Core
- * @copyright  Copyright (c) 2005-2012 Kumbia Team (http://www.kumbiaphp.com)
+ * @category   View
+ *
+ * @copyright  Copyright (c) 2005 - 2017 Kumbia Team (http://www.kumbiaphp.com)
  * @license    http://wiki.kumbiaphp.com/Licencia     New BSD License
  */
 
 /**
- * Renderer de vistas
+ * Renderer de vistas.
  *
- * @category   Kumbia
- * @package    Core
+ * @category   View
  */
 class KumbiaView
 {
-
     /**
-     * Contenido
+     * Contenido.
      *
      * @var string
      */
     protected static $_content;
     /**
-     * Vista a renderizar
+     * Vista a renderizar.
      *
      * @var string
      * */
     protected static $_view;
     /**
-     * Template
+     * Template.
      *
      * @var string
      */
     protected static $_template = 'default';
     /**
-     * Indica el tipo de salida generada por el controlador
+     * Indica el tipo de salida generada por el controlador.
      *
      * @var string
      */
     protected static $_response;
     /**
-     * Indica el path al que se le añadira la constante correspondiente
+     * Indica el path al que se le añadira la constante correspondiente.
      *
      * @var string
      */
     protected static $_path;
     /**
-     * Número de minutos que será cacheada la vista actual
+     * Número de minutos que será cacheada la vista actual.
      *
      * type: tipo de cache (view, template)
      * time: tiempo de vida de cache
      *
      * @var array
      */
-    protected static $_cache = array('type' => FALSE, 'time' => FALSE, 'group' => FALSE);
-    
+    protected static $_cache = array('type' => false, 'time' => false, 'group' => false);
+
     /**
-     * Controlador actual
-     * 
-     * @var Controller
+     * Datos del Controlador actual.
+     *
+     * @var array
      */
     protected static $_controller;
 
     /**
-     * Cambia el view y opcionalmente el template
+     * Cambia el view y opcionalmente el template.
      *
-     * @param string $view nombre del view a utilizar sin .phtml
-     * @param string $template	opcional nombre del template a utilizar sin .phtml
+     * @param string $view     nombre del view a utilizar sin .phtml
+     * @param string $template opcional nombre del template a utilizar sin .phtml
      */
-    public static function select($view, $template = FALSE)
+    public static function select($view, $template = false)
     {
         self::$_view = $view;
 
         // verifica si se indico template
-        if ($template !== FALSE) {
+        if ($template !== false) {
             self::$_template = $template;
         }
     }
 
     /**
-     * Asigna el template para la vista
+     * Asigna el template para la vista.
      *
      * @param string $template nombre del template a utilizar sin .phtml
      */
@@ -104,52 +102,49 @@ class KumbiaView
      * Indica el tipo de Respuesta dada por el controlador
      * buscando el view con esa extension.
      * ej. View::response('xml');
-     * buscara: views/controller/action.xml.phtml
+     * buscara: views/controller/action.xml.phtml.
      *
-     * @param string $type
+     * @param string $response
      * @param string $template Opcional nombre del template sin .phtml
      */
-    public static function response($response, $template = FALSE)
+    public static function response($response, $template = false)
     {
-        if ($response == 'view') { //se mantiene pero ya esta deprecated
-            self::$_template = NULL;
-        } else {
-            self::$_response = $response;
-        }
+        self::$_response = $response;
 
         // verifica si se indico template
-        if ($template !== FALSE) {
+        if ($template !== false) {
             self::$_template = $template;
         }
     }
 
     /**
-     * Asigna el path de la vista
+     * Asigna el path de la vista.
      *
      * @param string $path path de la vista sin extension .phtml
      */
     public static function setPath($path)
     {
-        self::$_path = $path . '/';
+        self::$_path = $path.'/';
     }
 
     /**
-     * Obtiene el path para vista incluyendo la extension .phtml
+     * Obtiene el path para vista incluyendo la extension .phtml.
      *
      * @return string
      */
     public static function getPath()
     {
-        if (self::$_response && self::$_response != 'view') {
-            return self::$_path . self::$_view . '.' . self::$_response . '.phtml';
+        if (self::$_response) {
+            return self::$_path.self::$_view.'.'.self::$_response.'.phtml';
         }
-        return self::$_path . self::$_view . '.phtml';
+
+        return self::$_path.self::$_view.'.phtml';
     }
 
     /**
-     * Obtiene un atributo de KumbiaView
+     * Obtiene un atributo de KumbiaView.
      *
-     * @param string $attribute nombre de atributo (template, response, path, etc)
+     * @param string $atribute nombre de atributo (template, response, path, etc)
      */
     public static function get($atribute)
     {
@@ -157,100 +152,137 @@ class KumbiaView
     }
 
     /**
-     * Asigna cacheo de vistas o template
+     * Asigna cacheo de vistas o template.
      *
      * @param $time Tiempo de vida de cache
      * @param $type Tipo de cache (view, template)
      * @param $group Grupo de pertenencia de cache
+     *
+     * @return bool En producción y cache de view
      */
-    public static function cache($time, $type='view', $group=FALSE)
+    public static function cache($time, $type = 'view', $group = 'kumbia.view')
     {
-        if ($time !== FALSE) {
-            self::$_cache['type'] = $type;
-            self::$_cache['time'] = $time;
-            self::$_cache['group'] = $group;
-        } else {
-            self::$_cache['type'] = FALSE;
+        if ($time === false) { //TODO borrar cache
+            self::$_cache['type'] = false;
+
+            return false;
+        }
+        self::$_cache['type'] = $type;
+        self::$_cache['time'] = $time;
+        self::$_cache['group'] = $group;
+        //Si está en producción para view
+        if (PRODUCTION && $type === 'view') {
+            return self::getCache(); //TRUE si está cacheada
+        }
+
+        return false;
+    }
+
+    /**
+     * Obtiene la cache de view.
+     *
+     * @return bool
+     */
+    protected static function getCache()
+    {
+        // el contenido permanece nulo si no hay nada cacheado o la cache expiro
+        self::$_content = Cache::driver()->get(Router::get('route'), self::$_cache['group']);
+
+        return self::$_content !== null;
+    }
+
+    /**
+     * Obtiene el view.
+     *
+     * @return string path del view
+     */
+    protected static function getView()
+    {
+        $file = APP_PATH.'views/'.self::getPath();
+        //Si no existe el view y es scaffold
+        if (!is_file($file) && ($scaffold = self::$_controller['scaffold'])) {
+            $file = APP_PATH."views/_shared/scaffolds/$scaffold/".self::$_view.'.phtml';
+        }
+
+        return $file;
+    }
+
+    /**
+     * Cachea el view o template.
+     *
+     * @param string $type view o template
+     */
+    protected static function saveCache($type)
+    {
+        // si esta en produccion y se cachea la vista
+        if (PRODUCTION && self::$_cache['type'] === $type) {
+            Cache::driver()->save(ob_get_contents(), self::$_cache['time'], Router::get('route'), self::$_cache['group']);
         }
     }
 
     /**
-     * Renderiza la vista
+     * Renderiza la vista.
      *
      * @param Controller $controller
-     * @param string $url url a renderizar
      */
-    public static function render(/* Controller */ $controller, /* Router */  $_url)
+    public static function render(Controller $controller)
     {
-		// Guarda el controlador actual
-		self::$_controller = $controller;
-		
         if (!self::$_view && !self::$_template) {
             return ob_end_flush();
         }
 
+        // Guarda los datos del controlador y los envia
+        self::generate(self::$_controller = get_object_vars($controller));
+    }
+
+    /**
+     * Genera la vista.
+     *
+     * @param array $controller
+     */
+    protected static function generate($controller)
+    {
+        // Registra la autocarga de helpers
+        spl_autoload_register('kumbia_autoload_helper', true, true);
         // Mapea los atributos del controller en el scope
-        extract(get_object_vars($controller), EXTR_OVERWRITE);
+        extract($controller, EXTR_OVERWRITE);
 
-        // inicia contenido con valor nulo
-        self::$_content = NULL;
-
-        // si se encuentra en produccion
-        if (PRODUCTION) {
-            // si se cachea vista
-            if (self::$_cache['type'] == 'view') {
-                // el contenido permanece nulo si no hay nada cacheado o la cache expiro
-                self::$_content = Cache::driver()->get($_url, self::$_cache['group']);
-            }
-        }
-
-        // carga la vista si no esta en produccion o se usa scaffold o no hay contenido cargado
-        if (!PRODUCTION || $scaffold || !self::$_content) {
+        // carga la vista si tiene view y no esta cacheada
+        if (self::$_view && self::$_content === null) {
             // Carga el contenido del buffer de salida
             self::$_content = ob_get_clean();
-
             // Renderizar vista
-            if ($view = self::$_view) {
-                ob_start();
+            ob_start();
 
-                $file = APP_PATH . 'views/' . self::getPath();
-                if (!is_file($file) && $scaffold) {
-                    $file = APP_PATH . "views/_shared/scaffolds/$scaffold/$view.phtml";
-                }
-
-                // carga la vista
-                if (!include $file)
-                    throw new KumbiaException('Vista "' . self::getPath() . '" no encontrada', 'no_view');
-
-                // si esta en produccion y se cachea la vista
-                if (PRODUCTION && self::$_cache['type'] == 'view') {
-                    Cache::driver()->save(ob_get_contents(), self::$_cache['time'], $_url, self::$_cache['group']);
-                }
-
-                // Verifica si hay template
-                if (!self::$_template) {
-                    ob_end_flush();
-                    return;
-                }
-
-                self::$_content = ob_get_clean();
+            // carga la vista
+            if (!include self::getView()) {
+                throw new KumbiaException('Vista "'.self::getPath().'" no encontrada', 'no_view');
             }
-        } else {
-            ob_clean();
+
+            // si esta en produccion y se cachea la vista
+            self::saveCache('view');
+
+            // Verifica si hay template
+            if (!self::$_template) {
+                ob_end_flush();
+
+                return;
+            }
+
+            self::$_content = ob_get_clean();
         }
 
         // Renderizar template
-        if ($template = self::$_template) {
+        if ($__template = self::$_template) {
             ob_start();
 
             // carga el template
-            if (!include APP_PATH . "views/_shared/templates/$template.phtml")
-                throw new KumbiaException("Template $template no encontrado");
+            if (!include APP_PATH."views/_shared/templates/$__template.phtml") {
+                throw new KumbiaException("Template $__template no encontrado");
+            }
 
             // si esta en produccion y se cachea template
-            if (PRODUCTION && self::$_cache['type'] == 'template') {
-                Cache::driver()->save(ob_get_contents(), self::$_cache['time'], $_url, "kumbia.templates");
-            }
+            self::saveCache('template');
 
             return ob_end_flush();
         }
@@ -259,8 +291,7 @@ class KumbiaView
     }
 
     /**
-     * Imprime el contenido del buffer
-     *
+     * Imprime el contenido del buffer.
      */
     public static function content()
     {
@@ -272,39 +303,43 @@ class KumbiaView
     }
 
     /**
-     * Renderiza una vista parcial
+     * Renderiza una vista parcial.
      *
      * @param string $partial vista a renderizar
-     * @param string $time tiempo de cache
-     * @param array $params
-     * @param string $group grupo de cache
+     * @param string $__time  tiempo de cache
+     * @param array  $params
+     * @param string $group   grupo de cache
+     *
      * @return string
      * @throw KumbiaException
      */
-    public static function partial($partial, $__time=FALSE, $params=array(), $group ='kumbia.partials')
+    public static function partial($partial, $__time = '', $params = null, $group = 'kumbia.partials')
     {
         if (PRODUCTION && $__time && !Cache::driver()->start($__time, $partial, $group)) {
             return;
         }
 
         //Verificando el partials en el dir app
-        $__file = APP_PATH . "views/_shared/partials/$partial.phtml";
+        $__file = APP_PATH."views/_shared/partials/$partial.phtml";
 
         if (!is_file($__file)) {
             //Verificando el partials en el dir core
-            $__file = CORE_PATH . "views/partials/$partial.phtml";
+            $__file = CORE_PATH."views/partials/$partial.phtml";
         }
 
-        if (is_string($params)) {
-            $params = Util::getParams($params);
-        }
+        if ($params) {
+            if (is_string($params)) {
+                $params = Util::getParams(explode(',', $params));
+            }
 
-        // carga los parametros en el scope
-        extract($params, EXTR_OVERWRITE);
+            // carga los parametros en el scope
+            extract($params, EXTR_OVERWRITE);
+        }
 
         // carga la vista parcial
-        if (!include $__file)
-            throw new KumbiaException('Vista Parcial "' . $__file . '" no se encontro');
+        if (!include $__file) {
+            throw new KumbiaException('Vista Parcial "'.$__file.'" no encontrada', 'no_partial');
+        }
 
         // se guarda en la cache de ser requerido
         if (PRODUCTION && $__time) {
@@ -313,63 +348,32 @@ class KumbiaView
     }
 
     /**
-     * Carga los helpers
-     * @deprecated ahora se cargan automaticamente
+     * Obtiene el valor de un atributo público o todos del controlador.
      *
-     * @param string $helper
-     * @throw KumbiaException
+     * @param string $var nombre de variable
+     *
+     * @return mixed valor de la variable
      */
-    public static function helpers($helper)
+    public static function getVar($var = '')
     {
-        $helper = Util::smallcase($helper);
-        $path = "extensions/helpers/$helper.php";
-        $file = APP_PATH . $path;
-
-        if (!is_file($file)) {
-            if (!include_once CORE_PATH . $path)
-                throw new KumbiaException("Helpers $helper no encontrado");
-            return;
+        if (!$var) {
+            return self::$_controller;
         }
 
-        require_once $file;
+        return isset(self::$_controller[$var]) ? self::$_controller[$var] : null;
     }
-
-	/**
-	 * Obtiene el valor una variable pasada a la vista desde el controlador
-	 * 
-	 * @param string $var nombre de variable
-	 * @return mixed valor de la variable
-	 */
-	public static function getVar($var)
-	{
-		return isset(self::$_controller->$var) ? self::$_controller->$var : NULL;
-	}
 }
 
 /**
  * Atajo para htmlspecialchars, por defecto toma el charset de la
- * aplicacion
+ * aplicacion.
  *
  * @param string $s
  * @param string $charset
+ *
  * @return string
  */
 function h($s, $charset = APP_CHARSET)
 {
-
     return htmlspecialchars($s, ENT_QUOTES, $charset);
-}
-
-/**
- * Atajo para echo + htmlspecialchars, por defecto toma el charset de la
- * aplicacion
- *
- * @param string $s
- * @param string $charset
- * @return string
- */
-function eh($s, $charset = APP_CHARSET)
-{
-
-    echo htmlspecialchars($s, ENT_QUOTES, $charset);
 }

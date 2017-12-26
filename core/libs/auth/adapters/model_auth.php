@@ -13,8 +13,8 @@
  * to license@kumbiaphp.com so we can send you a copy immediately.
  *
  * @category   extensions
- * @package    Auth 
- * @copyright  Copyright (c) 2005-2012 Kumbia Team (http://www.kumbiaphp.com)
+ * @package    Auth
+ * @copyright  Copyright (c) 2005 - 2017 Kumbia Team (http://www.kumbiaphp.com)
  * @license    http://wiki.kumbiaphp.com/Licencia     New BSD License
  */
 
@@ -59,6 +59,10 @@ class ModelAuth implements AuthInterface
      * Identidad encontrara
      */
     private $identity = array();
+    /**
+     * Nombre de la clase del modelo
+     */
+    private $class;
 
     /**
      * Constructor del adaptador
@@ -82,7 +86,7 @@ class ModelAuth implements AuthInterface
 
     /**
      * Obtiene los datos de identidad obtenidos al autenticar
-     * 
+     *
      */
     public function get_identity()
     {
@@ -101,9 +105,9 @@ class ModelAuth implements AuthInterface
             $value = addslashes($value);
             $where_condition[] = "$field = '$value'";
         }
-        $result = Load::model($this->class)->count(join(" AND ", $where_condition));
+        $result = (new $this->class)->count(join(" AND ", $where_condition));
         if ($result) {
-            $model = ActiveRecord::get($this->class)->find_first(join(" AND ", $where_condition));
+            $model = KumbiaActiveRecord::get($this->class)->find_first(join(" AND ", $where_condition));
             $identity = array();
             foreach ($model->fields as $field) {
                 /**

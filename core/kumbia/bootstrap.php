@@ -14,7 +14,7 @@
  *
  * @category   Kumbia
  * @package    Core
- * @copyright  Copyright (c) 2005-2012 KumbiaPHP Team (http://www.kumbiaphp.com)
+ * @copyright  Copyright (c) 2005 - 2017 KumbiaPHP Team (http://www.kumbiaphp.com)
  * @license    http://wiki.kumbiaphp.com/Licencia     New BSD License
  */
 
@@ -25,126 +25,58 @@
  * @package    Core
  */
 
-// Inicia la sesion
-session_start();
-
 // Iniciar el buffer de salida
 ob_start();
 
 // Versión de KumbiaPHP
-function kumbia_version()
-{
-    return '1.0 Beta 2';
+function kumbia_version() {
+    return 'RC 1.0';
 }
 
 // @see KumbiaException
-function handle_exception($e)
-{
-    KumbiaException::handle_exception($e);
+function handle_exception($e) {
+    KumbiaException::handleException($e);
 }
-
-// Registrar la autocarga
-spl_autoload_register('auto');
 
 // Inicializar el ExceptionHandler
 set_exception_handler('handle_exception');
 
-// @see Util
-require_once CORE_PATH . 'kumbia/util.php';
+// @see Autoload
+require CORE_PATH . 'kumbia/autoload.php';
 
 // @see Config
-require_once CORE_PATH . 'kumbia/config.php';
+require CORE_PATH . 'kumbia/config.php';
 
-// Lee la configuracion
-$config = Config::read('config');
-
-// Constante que indica si la aplicacion se encuentra en produccion
-if (!defined('PRODUCTION')) {
-    define('PRODUCTION', $config['application']['production']);
-}
-
-// Carga la cache y verifica si esta cacheado el template, al estar en produccion
-if (PRODUCTION) {
+if (PRODUCTION && Config::get('config.application.cache_template')) {
     // @see Cache
-    require_once CORE_PATH . 'libs/cache/cache.php';
+    require CORE_PATH . 'libs/cache/cache.php';
 
     //Asigna el driver por defecto usando el config.ini
-    if (isset($config['application']['cache_driver']))
-        Cache::setDefault($config['application']['cache_driver']);
+    if ($config = Config::get('config.application.cache_driver')) {
+        Cache::setDefault($config);
+    }
 
     // Verifica si esta cacheado el template
-    if ($template = Cache::driver()->get($url, 'kumbia.templates')) { //verifica cache de template para la url
+    if ($template = Cache::driver()->get($url, 'kumbia.templates')) {
+        //verifica cache de template para la url
         echo $template;
-        echo '<!-- Tiempo: ' . round(microtime(1) - START_TIME, 4) . ' seg. -->';
+        echo '<!-- Time: ', round((microtime(1) - $_SERVER['REQUEST_TIME_FLOAT'])*1000, 4), ' ms -->';
         exit(0);
     }
 }
 
-// Asignando locale
-if (isset($config['application']['locale'])) {
-    setlocale(LC_ALL, $config['application']['locale']);
-}
-
-// Establecer el timezone para las fechas y horas
-if (isset($config['application']['timezone'])) {
-    ini_set('date.timezone', $config['application']['timezone']);
-}
-
-// Establecer el charset de la app en la constante APP_CHARSET
-if (isset($config['application']['charset'])) {
-    define('APP_CHARSET', strtoupper($config['application']['charset']));
-} else {
-    define('APP_CHARSET', 'UTF-8');
-}
-
-// Autocarga de clases
-function auto($class)
-{
-
-    // Optimizando carga
-    if ($class == 'ActiveRecord') {
-        return require_once APP_PATH . 'libs/active_record.php';
-    }
-    if ($class == 'Load') {
-        return require_once CORE_PATH . 'kumbia/load.php';
-    }   
-
-    // Pasando a smallcase
-    $class = Util::smallcase($class);
-    if (is_file(APP_PATH . "extensions/helpers/$class.php")) {
-        return require_once APP_PATH . "extensions/helpers/$class.php";
-    }
-    if (is_file(CORE_PATH . "extensions/helpers/$class.php")) {
-        return require_once CORE_PATH . "extensions/helpers/$class.php";
-    }
-    if (is_file(APP_PATH . "libs/$class.php")) {
-        return require_once APP_PATH . "libs/$class.php";
-    }
-    if (is_file(CORE_PATH . "libs/$class/$class.php")) {
-        return require_once CORE_PATH . "libs/$class/$class.php";
-    }
-
-    if ($class == 'kumbia_exception') {
-        require_once CORE_PATH . 'kumbia/kumbia_exception.php';
-    }
-}
-
 // @see Router
-require_once CORE_PATH . 'kumbia/router.php';
+require CORE_PATH . 'kumbia/router.php';
 
 // @see Controller
-require_once APP_PATH . 'libs/app_controller.php';
+require APP_PATH . 'libs/app_controller.php';
 
 // @see KumbiaView
-require_once APP_PATH . 'libs/view.php';
+require APP_PATH . 'libs/view.php';
 
 // Ejecuta el request
-try {
-    // Dispatch y renderiza la vista
-    View::render(Router::execute($url), $url);
-} catch (KumbiaException $e) {
-    KumbiaException::handle_exception($e);
-}
+// Dispatch y renderiza la vista
+View::render(Router::execute($url));
 
 // Fin del request
-exit();
+//exit();
