@@ -1,1 +1,9 @@
-default/app/config/databases.ini
+vendor/*
+
+.vscode
+.sonar
+.vscode-upload.json
+sonar-project.properties
+tags
+composer.lock
+.gitignore
