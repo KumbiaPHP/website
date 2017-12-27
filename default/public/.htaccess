@@ -1,5 +1,8 @@
 # Descomentar la linea si carga el index.html
-#DirectoryIndex index.php
+DirectoryIndex index.php index.html
+AddDefaultCharset utf-8
+# Change server time zone http://www.php.net/manual/en/timezones.php
+SetEnv TZ Europe/Madrid
 
 # Si esta mod_rewrite habilitado
 <IfModule mod_rewrite.c>
@@ -16,5 +19,7 @@
 
     # Para peticiones que no son archivos ni directorios
     # Reescribe a index.php?url=URL
-	RewriteRule ^(.*)$ index.php?_url=/$1 [QSA,L]
+	#RewriteRule ^(.*)$ index.php?_url=/$1 [QSA,L]
+    RewriteRule (.*) index.php/$1 [L]
+    #RewriteRule ^ index.php [L]
 </IfModule>
