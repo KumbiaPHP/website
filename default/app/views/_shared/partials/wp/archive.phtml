@@ -1,0 +1,7 @@
+<?php $archive = WpPosts::archive(); ?>
+<aside class="collection-item">
+    <h3>Archivo</h3>
+    <?php foreach ($archive as $date) : ?>
+    <a href="/blog/<?=$date->post_link; ?>"><?=ucfirst($date->post_date_show), " ($date->total)"; ?></a>
+    <?php endforeach; ?>        
+</aside>

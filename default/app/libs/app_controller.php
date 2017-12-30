@@ -11,20 +11,22 @@
 // @see Controller nuevo controller
 require_once CORE_PATH . 'kumbia/controller.php';
 
-class AppController extends Controller {
+class AppController extends Controller
+{
 
     /**
      * Nombre de la página que se mostrará en el template
      */
-    public $page_title = 'KumbiaPHP web & app PHP Framework en español';
+    public $page_title = 'KumbiaPHP web y app PHP Framework en español';
     
     public $menu = 'index'; //para seleccionar el menu
 
-    final protected function initialize() {
-        
+    final protected function initialize()
+    {
     }
 
-    final protected function finalize() {        
-        $this->page_title .= ' - KumbiaPHP';        
+    final protected function finalize()
+    {
+        $this->page_title .= ' - KumbiaPHP';
     }
 }

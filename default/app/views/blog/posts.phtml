@@ -1,0 +1,62 @@
+<?php if (!empty($main_header)) : ?>
+    <header>
+            <h1>
+                <small><?=$header_type; ?></small>
+                <?=$main_header; ?>
+            </h1>
+            <?php if (!empty($author)) : ?>
+                <div>
+                    <em><?=$posts[0]->description; ?></em>
+                </div>
+                <div class="col s6">
+                    <?=Html::gravatar($posts[0]->user_email, 'gravatar', 64); ?>
+                    <a href="<?=$posts[0]->user_url; ?>" target="_blank"><?=$posts[0]->user_url; ?></a>
+                </div>
+            <?php endif; ?>
+    </header>
+<?php endif;
+foreach ($posts as $post) : ?>
+    <article>
+        <header>
+            <h2>
+                <a href="/blog/<?=$post->post_link; ?>">
+                    <?=($action_name === 'search')
+                        ? str_ireplace($main_header,
+                            '<span style="background:yellow">'.$main_header.'</span>',
+                            $post->post_title)
+                        : $post->post_title; ?>
+                </a>
+            </h2>
+            <div class="meta-data">
+            <span>
+                <svg style="width:20px;height:20px" viewBox="0 0 24 24">
+                <path fill="#888" d="M9,10H7V12H9V10M13,10H11V12H13V10M17,10H15V12H17V10M19,3H18V1H16V3H8V1H6V3H5C3.89,3 3,3.9 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5A2,2 0 0,0 19,3M19,19H5V8H19V19Z" />
+                </svg>
+                <?= $post->post_date_show; ?>
+            </span>
+            <span>
+                <?=Html::gravatar($post->user_email, 'gravatar', 30); ?>  by 
+                <a href="/blog/author/<?=$post->user_nicename; ?>/"><?=$post->display_name; ?></a>
+            </span>
+            <span>
+                <svg style="width:20px;height:20px" viewBox="0 0 24 24">
+                <path fill="#888" d="M9,22A1,1 0 0,1 8,21V18H4A2,2 0 0,1 2,16V4C2,2.89 2.9,2 4,2H20A2,2 0 0,1 22,4V16A2,2 0 0,1 20,18H13.9L10.2,21.71C10,21.9 9.75,22 9.5,22V22H9M10,16V19.08L13.08,16H20V4H4V16H10M6,7H18V9H6V7M6,11H15V13H6V11Z" />
+                </svg> 
+                <a href="/blog/<?= $post->post_link, '#comments'; ?>"><?=$post->comment_count; ?> Comentarios</a>
+            </span></div>
+        </header>
+            <div>
+                <?php if ($action_name === 'search') : ?>
+                    <?php str_ireplace($main_header,
+                        '<span style="background:yellow">'.$main_header.'</span>',
+                        _wp::firstP($post->post_content)); ?>
+                <?php else : ?>
+                    <?= _wp::cut($post->post_content, $post->post_link); ?> 
+                <?php endif; ?>
+            </div>
+            
+    </article>
+<?php endforeach; ?>
+<div>
+<?php $headers = Paginate::create($posts, $paginate); ?>
+</div> 

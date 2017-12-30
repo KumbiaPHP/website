@@ -7,12 +7,12 @@
  * @return html
  */
 
-if ($feed = simplexml_load_file($url)): ?>
+if ($feed = simplexml_load_file($url)) : ?>
     <div class="feed">
-    <h3><a href="<?= h($feed->channel->link)?>" title="<?= h($feed->channel->description)?>"><?= h($name)?></a></h3>
+    <h3><a href="<?= h($feed->channel->link)?>" title="<?= h($feed->channel->description)?>"><?= $name?></a></h3>
     <ul>
-    <? foreach ($feed->channel->item as $item) : ?>
-    <li><a href="<?= h($item->link)?>" title="<?= h(substr(strip_tags($item->description),0,200))?>..."><?= h($item->title)?></a></li>
-    <? endforeach?>
+    <?php foreach ($feed->channel->item as $item) : ?>
+    <li><a href="<?= h($item->link)?>" title="<?= h(substr(strip_tags($item->description), 0, 200))?>..."><?= h($item->title)?></a></li>
+    <?php endforeach?>
 </ul></div>
 <?php endif?>

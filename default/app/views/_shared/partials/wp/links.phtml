@@ -1,0 +1,8 @@
+<?php $links = WpLinks::allLinks(); ?>
+<aside class="collection-item">
+    <h3>Enlaces</h3>
+    <?php foreach ($links as $o) : ?> 
+        <a href="<?=$o->link_url; ?>" rel="<?=$o->link_rel; ?>" target="<?=$o->link_target ?? '_blank'; ?>" title="<?=$o->link_description; ?>">
+            <?=$o->link_name; ?></a>
+    <?php endforeach; ?> 
+</aside>

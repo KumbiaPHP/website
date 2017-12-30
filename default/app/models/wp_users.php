@@ -1,0 +1,14 @@
+<?php
+/**
+ */
+class WpUsers extends LiteRecord
+{
+	#
+    public function byID($cols='display_name')
+    {
+    	$sql = "SELECT ID, $cols FROM Yc08Yy853n_users";
+        $users = parent::all($sql);
+        foreach ($users as $o) $a[$o->ID] = $o;
+        return $a;
+    }
+}

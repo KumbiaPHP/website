@@ -1,0 +1,7 @@
+<?php $categories = WpTerms::categories(); ?>
+<aside class="collection-item">
+    <h3>Categorías</h3>
+    <?php foreach ($categories as $o) : ?>
+    <a href="/blog/category/<?=$o->slug; ?>/"> ❱ <?=$o->name; ?></a>
+    <?php endforeach; ?> 
+</aside>

@@ -1,0 +1,9 @@
+<?php $last_comments = WpComments::latest(4); ?>
+<aside>
+    <h3>Últimos comentarios</h3> 
+    <?php foreach ($last_comments as $o) : ?> 
+        <div class="valign-wrapper">
+            <?=$o->comment_author; ?> en: <a href="/blog/<?=$o->post_link, "#comment-$o->comment_ID"; ?>"><?=$o->post_title; ?></a>
+        </div>
+    <?php endforeach; ?> 
+</aside>

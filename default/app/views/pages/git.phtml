@@ -1,0 +1,10 @@
+<?php
+echo '<header>';
+error_reporting(E_ALL ^ E_STRICT);
+ini_set('display_errors', 'On');
+
+echo "Downloaging documentation from git...";
+$salida = shell_exec('bash /var/www/vhosts/kumbiaphp.com/git/documentacion.sh');
+echo "<pre>$salida</pre>";
+
+echo '</header>';

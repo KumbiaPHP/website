@@ -1,33 +1,34 @@
 <header>
 <div class="row container-top">    
-    <div class="span6 page-header ">
+    <div class="span10 page-header ">
         <h1>KumbiaPHP Framework</h1>
         <h2>Programar puede ser más fácil.</h2>
-        <p>Descarga KumbiaPHP y desarrolla aplicaciones web estables y rápidas.</p>
-        <h3><a href="https://github.com/KumbiaPHP/KumbiaPHP/archive/1.2.zip" class="btn-large" >Descargar KumbiaPHP 2.0</a></h3>
-    </div>
-    <div class="span6">
-	<?php echo Html::img('inicio-kumbiaphp.png','Bienvenida KumbiaPHP','width="350" height="202"') ?>   
-    </div>    
+        <p><small>Descarga KumbiaPHP y desarrolla aplicaciones web estables y rápidas.</small></p>
+        <h3><?= Html::link('#', 'Descargar KumbiaPHP 1.0', 'class="btn-large"')?></h3>
+		<!--<small><a href="#">Otras versiones</a> · <a href=#>Vagrant box</a></small>-->
+    </div>   
 </div>
 </header>
 <div class="row">
     <div class="span4">
-        <h3>Rápido, ligero y flexible</h3>
+        <h2>Rápido, ligero y flexible</h2>
         <p>KumbiaPHP es un framework para aplicaciones web libre escrito en <abbr title="Programación Orientada a Objetos">POO</abbr> PHP5. Basado en prácticas de desarrollo como <abbr title="Don't Repeat Yourself - No te repitas">DRY</abbr> y <abbr title="Keep It Short and Simple | Manténgalo breve y simple">KISS</abbr>, para software comercial y educativo.</P>
     <p>Fomenta la velocidad y eficiencia en la creación y mantenimiento de aplicaciones web. Reemplazando tareas de codificación repetitivas por poder, control y placer.</p>
-    <p><?php echo Html::link('caracteristicas/','Quiero saber más.')?></p>	
+    <p><?= Html::link('caracteristicas/', 'Quiero saber más.')?></p>	
         <?php //echo Html::img('rapido.png') ?> 
     </div>
     <div class="span4">
-        <h3>Documentación en español</h3>
+        <h2>Documentación en español</h2>
         <p>Aprende y disfruta de KumbiaPHP con los múltiples tutoriales y documentación en español, que hay disponible a traves de la wiki y del <abbr title="Application Programming Interface - Interfaz de programación de aplicaciones">API</abbr>.</p>
-    <p>Aprende más con la <?php echo Html::link('aprender/','documentación en español')?>.</p>
+    <p>Aprende más con la <?= Html::link('aprender/', 'documentación en español')?>.</p>
         <?php //echo Html::img('doc.png') ?> 
     </div>
     <div class="span4">
-        <h3>Control de versiones en GitHub</h3>
+        <h2>Colabora en GitHub</h2>
         <p>Puedes descargar la última versión en desarrollo desde GITHub y disponer de las últimas correcciones, cambios y mejoras..</p>
-        <p><a href="https://github.com/KumbiaPHP/KumbiaPHP" ><?php echo Html::img('github-img.jpeg','KumbiaPHP en github','width="120" height="46"') ?>KumbiaPHP en GitHub</a></p>
+        <p><a href="https://github.com/KumbiaPHP/KumbiaPHP" ><?= Html::img('github-img.jpeg', 'KumbiaPHP en github', 'width=120 height=46') ?>KumbiaPHP en GitHub</a></p>
     </div>
 </div>
+<section class="row contributors">
+    <?php View::partial('gitcontributors', '+1day')?> 
+</section>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="/css/structure2.min.css">
+        <link rel="stylesheet" href="/css/blog.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title><?=$title ?? ucfirst("$controller_name - $action_name"); ?> - KumbiaPHP framework</title>
+        <?= $headers ?? ''; ?> 
+        <meta property="og:type" content="website">
+        <meta property="og:site_name" content="KumbiaPHP framework">
+        <meta property="og:locale" content="es">
+        <meta property="og:url" content="https://www.kumbiaphp.com">
+        <meta property="og:image" content="https://www.kumbiaphp.com/img/logo250.png">
+        <meta property="og:title" content="Crea aplicaciones webs fácil y rápidamente">
+        <meta property="og:description" content="Framework PHP rápido y fácil">
+        <meta name="twitter:card" content="summary">
+        <meta name="twitter:site" content="@KumbiaPHP">
+        <meta name="twitter:domain" content="www.kumbiaphp.com">
+    </head>
+    <body>
+        <?php View::partial('main/navbar', null, ['menu' => $controller_name]); ?> 
+        <div id="content">
+        <header>
+            <div class="container-top">
+                <a href="/blog/">
+                    <img alt="Logo KumbiaPHP" class="responsive-img" src="/img/kumbiaphp.svg">
+                    <p>Web & app MVC PHP framework</p>
+                </a>
+            </div>
+        </header>
+        <div class="row">
+        <div class="eight columns<?= $aside ? '' : ' offset-by-two'; ?>">
+        <?php View::content(); ?>
+        </div>
+        <div class="four columns">
+        <?php if ($aside) : ?>
+            <?php View::partial('aside', '+3 hours'); ?>
+        <?php endif; ?>
+        </div></div></div>
+        <?php View::partial('footer'); ?> 
+        <script src="/javascript/prism.js" defer async></script>
+        <?php //View::partial('toast');?>
+    </body>
+</html>

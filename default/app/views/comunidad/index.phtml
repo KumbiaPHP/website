@@ -1,5 +1,5 @@
 <header>    
-    <div class="row container-top page-header">
+    <div class="row container-top">
         <h1>Comunidad de KumbiaPHP Framework PHP</h1>
         <p>Una gran comunidad hispana, en más de 20 paises.</p>
     </div>    
@@ -11,15 +11,15 @@
 <p>Ya no tendras que ir de página en página web, para estar informado y ayudar en la comunidad.</p>
 
 	<div class="span3">
-		<?php View::partial('feed', '+3 hours', array('name'=>'Blog KumbiaPHP', 'url'=>'http://www.kumbiaphp.com/blog/feed/'),'blog')?> 
+		<?php View::partial('feed', '+1 hours', array('name' => 'Blog KumbiaPHP', 'url' => 'https://www.kumbiaphp.com/blog/feed/'), 'blog'); ?> 
 	</div>
 	<div class="span3">
-		<?php View::partial('feed', '+3 hours', array('name'=>'Foro', 'url'=>'http://foro.kumbiaphp.com/discussions/feed.rss'),'foro')?> 
+		<?php View::partial('feed', '+1 hours', array('name' => 'Foro', 'url' => 'http://foro.kumbiaphp.com/discussions/feed.rss'), 'foro'); ?> 
 	</div>
 	<div class="span3">
-		<?php View::partial('feed', '+3 hours', array('name'=>'Twitter', 'url'=>'http://search.twitter.com/search.rss?q=kumbiaphp'),'twitter')?> 
+		<?php //View::partial('feed', '+3 hours', array('name'=>'Twitter', 'url'=>'http://search.twitter.com/search.rss?q=kumbiaphp'),'twitter')?> 
 	</div>
 	<div class="span3">
-		<?php View::partial('feed', '+3 hours', array('name'=>'Grupo', 'url'=>'http://groups.google.com/group/kumbia/feed/rss_v2_0_msgs.xml'),'grùpo')?> 
+		<?php View::partial('feed', '+1 hours', array('name' => 'Grupo', 'url' => 'https://groups.google.com/group/kumbia/feed/rss_v2_0_msgs.xml'), 'grupo');?> 
 	</div>
 </div>

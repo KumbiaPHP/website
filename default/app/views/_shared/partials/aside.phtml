@@ -1,0 +1,28 @@
+<aside>
+    <aside>
+        <form action="/blog/search/" class="search">
+            <label>🔍</label><input type="search" name="q" placeholder="¿Buscar?">  
+        </form>
+    </aside>
+    <aside>
+        <h3>KumbiaPHP 1.0 RC</h3>
+        <a href="https://github.com/KumbiaPHP/KumbiaPHP/archive/1.0.zip"><img src="/img/ZIP-48.png" height="48" width="48"></a>
+        <a href="https://github.com/KumbiaPHP/KumbiaPHP/archive/1.0.tar.gz"><img src="/img/TAR-48.png" height="48"></a>
+        <a href="https://github.com/KumbiaPHP/KumbiaPHP"><img src="/img/GitHub-Mark-64px.png" height="48"></a>
+        <h4>Calidad del código:</h4>
+        <a href="https://scrutinizer-ci.com/g/KumbiaPHP/KumbiaPHP/?branch=1.0" target="_blank">
+            <img src="https://scrutinizer-ci.com/g/KumbiaPHP/KumbiaPHP/badges/quality-score.png?b=1.0">
+        </a>
+        <a href="https://codeclimate.com/github/KumbiaPHP/KumbiaPHP" target="_blank">
+            <img src="https://api.codeclimate.com/v1/badges/a274a3490c47304650c1/maintainability.svg">
+        </a>
+        <img src="/img/php7.svg" alt="PHP7 ready">
+        <h4>Canal Slack de KumbiaPHP (nuevo)</h4>
+        <p><a href="http://slack.kumbiaphp.com/">Conecta <img src="http://slack.kumbiaphp.com/badge.svg" alt="Slack de KumbiaPHP"></a></p>
+    </aside>
+    <?php View::partial('wp/categories'); ?> 
+    <?php View::partial('wp/links'); ?> 
+    <?php View::partial('wp/last_posts'); ?> 
+    <?php View::partial('wp/last_comments'); ?> 
+    <?php View::partial('wp/archive'); ?> 
+</aside>

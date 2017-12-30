@@ -1,0 +1,8 @@
+<?php $last_posts = WpPosts::latest(5); ?>
+<aside>
+    <h3>Artículos recientes</h3>
+    <?php foreach ($last_posts as $o) : ?> 
+        <div><a href="/blog/<?= $o->post_link; ?>"><?= $o->post_title; ?></a>
+        <?= $o->post_date_show; ?></div>
+    <?php endforeach; ?> 
+</aside>

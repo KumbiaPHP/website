@@ -1,13 +1,17 @@
 <nav>
 <div class="row">
-    <?php echo Html::link('','KumbiaPHP','class="logo span3" title="KumbiaPHP Framework PHP MVC"');//Html::img('kumbiaphp.png','KumbiaPHP Framework','width=183 height=50')) ?> 
-    <ul class="menu <?php echo $menu?>">
-        <li><?php echo Html::link('caracteristicas/', 'Características','class="caracteristicas"') ?></li>
-        <li><?php echo Html::link('escaparate/', 'Escaparate','class="escaparate"') ?></li>
-        <li><a href="http://www.kumbiaphp.com/blog/">Blog</a><?php //echo Html::link('blog/', 'Blog') ?></li>
-        <li><?php echo Html::link('aprender/', 'Documentación','class="aprender"') ?></li>
-        <li><?php echo Html::link('comunidad/', 'Comunidad','class="comunidad"') ?></li>
-        <li><?php echo Html::link('descargas/', 'Descargar','class="descargas"') ?></li>
+    <a href="/" class="span3 logo" title="KumbiaPHP Framework PHP MVC"><img src="/img/kumbiaphp.svg" alt="KumbiaPHP Framework" width="259" height="30"/></a>     
+    <div class="span9">
+    <label for="off-canvas">≡ Menu</label>
+    <input type="checkbox" id="off-canvas">
+    <ul class="menu <?= $menu; ?>">
+        <li><a href="/caracteristicas/" class="caracteristicas">Características</a></li>
+        <li><a href="/escaparate/" class="escaparate">Escaparate</a></li>
+        <li><a href="/blog/" class="blog">Blog</a></li>
+        <li><a href="/aprender/" class="aprender">Documentación</a></li>
+        <li><a href="/comunidad/" class="comunidad">Comunidad</a></li>
+        <li><a href="/descargas/" class="descargas">Descargar</a></li>
     </ul>
+    </div>
 </div>
-</nav>
+</nav> 
